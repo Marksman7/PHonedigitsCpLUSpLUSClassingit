@@ -1,0 +1,264 @@
+
+#include<vector>
+#include <iostream>
+#include <set>
+#include <string>
+
+//Can go up to 9 numbers, but all you have to do to make it go past 9 is to adjust the trackerint[] nextone[] and last[] to a higher number to do more but I though 9 was good enogh since thats how long a phone number could be
+
+//out side array to store al the valsuses + makes it super duper slow
+//()()()()std::string trackerstring[10000000];
+
+
+
+int main()
+{
+
+    std::string letters[8][4] = { {"a","b","c","" }, {"d","e","f","" }, {"g","h","i","" }, {"j","k","l","" }, {"m","n","o","" }, {"p","q","r","s"}, {"t","u","v","" }, {"w","x","y","z"}, };
+    std::string Numbers[8] = { "2", "3", "4", "5", "6", "7", "8", "9" };
+
+    int trackerint[9] = {0,0,0,0,0,0,0,0,0}; // tracks how many times each one is used
+    int nextone[9]= { 1,1,1,1,1,1,1,1,1 }; // variable is the next
+    int last[9]= { 0,0,0,0,0,0,0,0,0 };
+
+    std::string Reswlt = "";
+
+    std::string num = "";
+    std::cin >> num;
+
+    std::string rec = "";
+
+    int counter = 0;
+
+    int HowLong = 1;
+
+
+    
+
+    
+
+    int length = num.length();
+
+
+    for (int c = 0; c < length - 1; c++)
+    {
+
+        if (num.at(c) == Numbers[7].at(0) || num.at(c) == Numbers[5].at(0))
+        {
+                for (int h = 0; h < (length - c) -1; h++)
+                {
+                    nextone[c] = nextone[c] * 4;
+                }
+
+        }
+        else
+        {
+            for (int h = 0; h < (length - c) - 1; h++)
+            {
+                nextone[c] = nextone[c] * 3;
+            }
+
+        }
+        
+        //std::cout << nextone[c] << std::endl;
+
+        
+        
+    }
+
+    /*for (int d = 0; d < length - 1; d++)
+    {
+        nextone[d] = nextone[d] - 1;
+
+        std::cout << nextone[d] << std::endl;
+    }*/
+
+    for (int e = 0; e < length; e++)
+    {
+
+        if (num.at(e) == Numbers[7].at(0) || num.at(e) == Numbers[5].at(0))
+        {
+           
+
+            HowLong = HowLong * 4;
+        }
+        else
+        {
+            
+
+            HowLong = HowLong * 3;
+        }
+
+    }
+
+    //std::cout << HowLong << std::endl;
+
+    int test = 0;
+
+    /*for (int c = 0; c < 8; c++)
+    {
+        if (num.at(0) == Numbers[c].at(0))
+        {
+            //letters
+
+
+            trackerint[i] = trackerint[i] + 1;
+
+            if ( ((3 ^ (num.length() - i))/3) == trackerint[i] && !(num.at(0) == Numbers[7].at(0)) && !(num.at(0) == Numbers[5].at(0)))
+            {
+                trackerint[i] = 0;
+
+                if (nextone[i] < 3)
+                {
+                    nextone[i] = nextone + 1; 
+                }
+
+                if (nextone[i] >= 3 && nextone[0] != 3)
+                {
+                    nextone[i] = 0;
+                }
+
+            }
+            else if (((4 ^ (num.length() - i)) / 4) == trackerint[i])
+            {
+                trackerint[i] = 0;
+
+                if (nextone[i] < 4)
+                {
+                    nextone[i] = nextone + 1;
+                }
+                
+                if (nextone[i] >= 4)
+                {
+                    nextone[i] = 0;
+                }
+            }
+
+        }
+    }
+
+    if (((3 ^ (num.length() - i)) / 3) == trackerint[i] /*&& !(num.at(0) == Numbers[7].at(0)) && !(num.at(0) == Numbers[5].at(0)))
+                        {
+                        trackerint[i] = 0;
+
+                        /f (nextone[i] < 3)
+                        {
+                            nextone[i] = nextone[i] + 1;
+                            //std::cout << "1\n";
+
+                        }
+
+                        if (nextone[i] >= 3 && nextone[0] != 3)
+                        {
+                            nextone[i] = 0;
+                        }
+
+                        }
+                        else if (((4 ^ (num.length() - i)) / 4) == trackerint[i])
+                        {
+                        trackerint[i] = 0;
+
+                        if (nextone[i] < 4)
+                        {
+                            nextone[i] = nextone[i] + 1;
+                        }
+
+                        if (nextone[i] >= 4)
+                        {
+                            nextone[i] = 0;
+                        }
+                        }
+
+*/
+
+     
+        while (counter < HowLong)
+        {
+
+            for (int i = 0; i < length; i++)
+            {
+
+                for (int c = 0; c < 8; c++)
+                {
+                    if (num.at(i) == Numbers[c].at(0))
+                    {
+                        //letters
+                        
+
+                        Reswlt = Reswlt + letters[c][last[i]];
+
+
+                        trackerint[i] = trackerint[i] + 1;
+
+                        //test = ((3 ^ (length - i)) / 3);
+                        //std::cout << nextone[i]; // << std::endl;
+                        //std::cout << last[i]; //<< std::endl;
+                        //std::cout << trackerint[i] << std::endl;
+                        if (nextone[i] <= trackerint[i] /*&& !(num.at(i) == Numbers[7].at(0)) && !(num.at(i) == Numbers[5].at(0))*/)
+                        {
+                            trackerint[i] = 0;
+
+                            last[i] = last[i] + 1;
+
+
+                            if (num.at(i) == Numbers[7].at(0) || num.at(i) == Numbers[5].at(0))
+                            {
+                                if (last[i] >= 4)
+                                {
+                                    last[i] = 0;
+                                }
+                            }
+                            else if ( !(num.at(i) == Numbers[7].at(0) || num.at(i) == Numbers[5].at(0)))
+                            {
+                                if (last[i] >= 3)
+                                {
+                                    last[i] = 0;
+                                }
+                            }
+                            /*if (nextone[i] < 3)
+                            {
+                                nextone[i] = nextone[i] + 1;
+                                //std::cout << "1\n";
+
+                            }
+
+                            if (nextone[i] >= 3 && nextone[0] != 3)
+                            {
+                                nextone[i] = 0;
+                            }*/
+
+                        }
+                        /*else if (nextone[i] <= trackerint[i])
+                        {
+                            trackerint[i] = 0;
+
+                            last[i] = last[i] + 1;
+
+                            if (nextone[i] < 4)
+                            {
+                                nextone[i] = nextone[i] + 1;
+                            }
+
+                            if (nextone[i] >= 4)
+                            {
+                                nextone[i] = 0;
+                            }
+                        }*/
+
+                    }
+                }
+
+            }
+
+            //()()()out side array to store valuses
+            //trackerstring[counter] = Reswlt;
+
+            counter += 1;
+
+            std::cout << Reswlt + "\n";
+
+            
+
+            Reswlt = "";
+
+        }
